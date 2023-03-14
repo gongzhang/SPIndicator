@@ -28,17 +28,19 @@ fileprivate struct SPIndicatorRepresentable: UIViewRepresentable {
     
     func makeUIView(context: Context) -> WindowDetector {
         WindowDetector { window in
-            toggle(context.coordinator, in: window)
+            toggle(context, in: window)
         }
     }
     
     func updateUIView(_ view: WindowDetector, context: Context) {
         if let window = view.window {
-            toggle(context.coordinator, in: window)
+            toggle(context, in: window)
         }
     }
     
-    private func toggle(_ coordinator: Coordinator, in window: UIWindow) {
+    private func toggle(_ context: Context, in window: UIWindow) {
+        let coordinator = context.coordinator
+        
         if isPresented && coordinator.indicatorView == nil {
             let alertView: SPIndicatorView
             if let preset {
@@ -48,6 +50,15 @@ fileprivate struct SPIndicatorRepresentable: UIViewRepresentable {
             }
             alertView.presentWindow = window
             alertView.presentSide = presentSide
+            
+            switch context.environment.colorScheme {
+            case .light:
+                alertView.overrideUserInterfaceStyle = .light
+            case .dark:
+                alertView.overrideUserInterfaceStyle = .dark
+            @unknown default:
+                break
+            }
             
             customize(alertView)
             coordinator.indicatorView = alertView
