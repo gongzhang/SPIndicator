@@ -28,6 +28,7 @@ import SwiftUI
 
 extension View {
     
+    @available(*, deprecated, message: "use 'View.spIndicator(isPresented:title:message:preset:haptic:from:customize:)'")
     public func SPIndicator(
         isPresent: Binding<Bool>,
         indicatorView: SPIndicatorView,
@@ -47,6 +48,7 @@ extension View {
         return self
     }
     
+    @available(*, deprecated, message: "use 'View.spIndicator(isPresented:title:message:preset:haptic:from:customize:)'")
     public func SPIndicator(
         isPresent: Binding<Bool>,
         title: String = "",
@@ -68,6 +70,7 @@ extension View {
         return SPIndicator(isPresent: isPresent, indicatorView: indicatorView, duration: duration, haptic: haptic)
     }
     
+    @available(*, deprecated, message: "use 'View.spIndicator(isPresented:title:message:preset:haptic:from:customize:)'")
     public func SPIndicator(
         isPresent: Binding<Bool>,
         title: String,
